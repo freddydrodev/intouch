@@ -1,0 +1,25 @@
+# Source files
+src/
+tests/
+__tests__/
+
+# Config files
+tsconfig.json
+tsup.config.ts
+.gitignore
+.npmignore
+
+# Development files
+.vscode/
+.idea/
+*.log
+*.test.ts
+*.spec.ts
+
+# Build files (except dist)
+coverage/
+.nyc_output/
+
+# Misc
+.DS_Store
+node_modules/
