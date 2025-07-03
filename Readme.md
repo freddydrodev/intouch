@@ -19,35 +19,20 @@ pnpm add @freddydrodev/intouch
 
 ## Quick Start
 
-```typescript
-import { Intouch } from "@freddydrodev/intouch";
+### Method 1: Environment Variables (Recommended)
 
-// Initialize the client with your credentials
-const intouch = new Intouch(
-  agentCode: "your_agent_code",
-  partnerId: "your_partner_id",
-  loginApi: "your_login_api",
-  passwordApi: "your_password_api",
-);
-
-// Or use environment variables (Recommended)
-const intouch = new Intouch(); // Will use environment variables
-```
-
-## Environment Variables (Recommended)
-
-The recommended way to use this library is through environment variables. Create a `.env` file in your project root with the following variables:
+The easiest way to use this library is through environment variables. Create a `.env` file in your project root:
 
 ```env
 # Required for all operations
-INTOUCH_PARTNER_ID="XXX"
-INTOUCH_CODE_AGENT="XXX"
-INTOUCH_LOGIN_API_AGENT="XXX"
-INTOUCH_PASSWORD_API_AGENT="XXX"
+INTOUCH_AGENT_CODE="your_agent_code"
+INTOUCH_PARTNER_ID="your_partner_id"
+INTOUCH_LOGIN_API="your_login_api"
+INTOUCH_PASSWORD_API="your_password_api"
 
 # Required for Cash In operations
-INTOUCH_CI_USERNAME="XXX"
-INTOUCH_CI_PASSWORD="XXX"
+INTOUCH_CI_USERNAME="your_username"
+INTOUCH_CI_PASSWORD="your_password"
 ```
 
 Then initialize the client without parameters:
@@ -57,6 +42,64 @@ import { Intouch } from "@freddydrodev/intouch";
 
 // The client will automatically use the environment variables
 const intouch = new Intouch();
+```
+
+### Method 2: Configuration Object
+
+```typescript
+import { Intouch } from "@freddydrodev/intouch";
+
+// Initialize the client with a configuration object
+const intouch = new Intouch({
+  agentCode: "your_agent_code",
+  partnerId: "your_partner_id",
+  loginApi: "your_login_api",
+  passwordApi: "your_password_api",
+  username: "your_username",
+  password: "your_password",
+});
+```
+
+### Method 3: Individual Parameters
+
+```typescript
+import { Intouch } from "@freddydrodev/intouch";
+
+// Initialize the client with individual parameters
+const intouch = new Intouch(
+  "your_agent_code",
+  "your_partner_id",
+  "your_login_api",
+  "your_password_api",
+  "your_username",
+  "your_password"
+);
+```
+
+## Configuration
+
+### Environment Variables (Recommended)
+
+| Variable               | Description                        | Required |
+| ---------------------- | ---------------------------------- | -------- |
+| `INTOUCH_AGENT_CODE`   | Your Intouch agent code            | Yes      |
+| `INTOUCH_PARTNER_ID`   | Your partner ID                    | Yes      |
+| `INTOUCH_LOGIN_API`    | API login credentials              | Yes      |
+| `INTOUCH_PASSWORD_API` | API password credentials           | Yes      |
+| `INTOUCH_CI_USERNAME`  | Username for digest authentication | Yes      |
+| `INTOUCH_CI_PASSWORD`  | Password for digest authentication | Yes      |
+
+### Configuration Object Interface
+
+```typescript
+interface IntouchConfig {
+  agentCode: string; // Your Intouch agent code
+  partnerId: string; // Your partner ID
+  loginApi: string; // API login credentials
+  passwordApi: string; // API password credentials
+  username: string; // Username for digest authentication
+  password: string; // Password for digest authentication
+}
 ```
 
 ## Features
