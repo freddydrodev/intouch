@@ -25,7 +25,6 @@ export class Intouch {
   public readonly balance: IntouchBalance;
   public readonly cashout: IntouchCashout;
   public readonly cashin: IntouchCashin;
-  private readonly digest: DigestFetch;
 
   /**
    * Creates an instance of Intouch
@@ -143,24 +142,24 @@ export class Intouch {
       );
     }
 
-    const digest = new DigestFetch(finalUsername, finalPassword, {
+    const cashoutDigest = new DigestFetch(finalUsername, finalPassword);
+
+    const cashinDigest = new DigestFetch(finalUsername, finalPassword, {
       basic: true,
     });
-
-    this.digest = digest;
 
     this.balance = new IntouchBalance(
       agentCode,
       finalPartnerId,
       finalLoginApi,
       finalPasswordApi,
-      digest
+      cashoutDigest
     );
     this.cashout = new IntouchCashout(
       agentCode,
       finalLoginApi,
       finalPasswordApi,
-      digest,
+      cashoutDigest,
       finalPartnerName
     );
     this.cashin = new IntouchCashin(
@@ -168,7 +167,7 @@ export class Intouch {
       finalPartnerId,
       finalLoginApi,
       finalPasswordApi,
-      digest
+      cashinDigest
     );
   }
 }
