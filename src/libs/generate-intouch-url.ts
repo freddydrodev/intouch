@@ -11,7 +11,8 @@ export const generateCashInIntouchURL = (
   loginApi: string,
   passwordApi: string
 ) => {
-  return `https://apidist.gutouch.net/apidist/sec/touchpayapi/${agentCode}/transaction?loginAgent=${loginApi}&passwordAgent=${passwordApi}`;
+  return `https://apidist.gutouch.net/apidist/sec/${agentCode}/cashin`;
+  // return `https://apidist.gutouch.net/apidist/sec/touchpayapi/${agentCode}/transaction?loginAgent=${loginApi}&passwordAgent=${passwordApi}`;
 };
 
 export const generateBalanceIntouchURL = (agentCode: string) => {

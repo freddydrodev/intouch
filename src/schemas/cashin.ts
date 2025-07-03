@@ -14,13 +14,13 @@ import { baseResponseDataSchema } from "./common";
  * @property {string} call_back_url - Valid URL for callback notifications
  */
 export const baseCashinDataSchema = z.object({
-  // service_id: z.string(),
+  service_id: z.string(),
   recipient_phone_number: z.string(),
   amount: z.number().positive(),
-  // partner_id: z.string(),
+  partner_id: z.string(),
   partner_transaction_id: z.string(),
-  // login_api: z.string(),
-  // password_api: z.string(),
+  login_api: z.string(),
+  password_api: z.string(),
   call_back_url: z.string().url(),
 });
 
@@ -35,21 +35,21 @@ export const omCICashinDataSchema = baseCashinDataSchema.extend({
  * Schema for MOOV CI cashin data
  */
 export const moovCICashinDataSchema = baseCashinDataSchema.extend({
-  // service_id: z.literal("CASHINMOOVPART"),
+  service_id: z.literal("CASHINMOOVPART"),
 });
 
 /**
  * Schema for MTN CI cashin data
  */
 export const mtnCICashinDataSchema = baseCashinDataSchema.extend({
-  // service_id: z.literal("CASHINMTNPART"),
+  service_id: z.literal("CASHINMTNPART"),
 });
 
 /**
  * Schema for WAVE CI cashin data
  */
 export const waveCICashinDataSchema = baseCashinDataSchema.extend({
-  // service_id: z.literal("CI_CASHIN_WAVE_PART"),
+  service_id: z.literal("CI_CASHIN_WAVE_PART"),
 });
 
 /**

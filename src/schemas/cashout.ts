@@ -38,7 +38,7 @@ export const omCICashoutDataSchema = baseCashoutDataSchema.extend({
   additionnalInfos: baseCashoutAdditionnalInfosSchema.extend({
     otp: z.string(),
   }),
-  // serviceCode: z.literal("PAIEMENTMARCHANDOMPAYCIDIRECT"),
+  serviceCode: z.literal("PAIEMENTMARCHANDOMPAYCIDIRECT"),
 });
 
 /**
@@ -46,7 +46,7 @@ export const omCICashoutDataSchema = baseCashoutDataSchema.extend({
  */
 export const moovCICashoutDataSchema = baseCashoutDataSchema.extend({
   additionnalInfos: baseCashoutAdditionnalInfosSchema,
-  // serviceCode: z.literal("PAIEMENTMARCHAND_MOOV_CI"),
+  serviceCode: z.literal("PAIEMENTMARCHAND_MOOV_CI"),
 });
 
 /**
@@ -54,7 +54,7 @@ export const moovCICashoutDataSchema = baseCashoutDataSchema.extend({
  */
 export const mtnCICashoutDataSchema = baseCashoutDataSchema.extend({
   additionnalInfos: baseCashoutAdditionnalInfosSchema,
-  // serviceCode: z.literal("PAIEMENTMARCHAND_MTN_CI"),
+  serviceCode: z.literal("PAIEMENTMARCHAND_MTN_CI"),
 });
 
 /**
@@ -66,7 +66,7 @@ export const waveCICashoutDataSchema = baseCashoutDataSchema.extend({
     return_url: z.string().url(),
     cancel_url: z.string().url(),
   }),
-  // serviceCode: z.literal("CI_PAIEMENTWAVE_TP"),
+  serviceCode: z.literal("CI_PAIEMENTWAVE_TP"),
 });
 
 /**

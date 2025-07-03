@@ -130,27 +130,31 @@ export class Intouch {
       );
     }
 
-    this.digest = new DigestFetch(finalUsername, finalPassword);
+    const digest = new DigestFetch(finalUsername, finalPassword, {
+      basic: true,
+    });
+
+    this.digest = digest;
 
     this.balance = new IntouchBalance(
       agentCode,
       finalPartnerId,
       finalLoginApi,
       finalPasswordApi,
-      this.digest
+      digest
     );
     this.cashout = new IntouchCashout(
       agentCode,
       finalLoginApi,
       finalPasswordApi,
-      this.digest
+      digest
     );
     this.cashin = new IntouchCashin(
       agentCode,
       finalPartnerId,
       finalLoginApi,
       finalPasswordApi,
-      this.digest
+      digest
     );
   }
 }
