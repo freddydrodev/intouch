@@ -1,4 +1,4 @@
-import { generateIntouchURL } from "@/libs/generate-intouch-url";
+import { generateCashOutIntouchURL } from "@/libs/generate-intouch-url";
 import {
   CashoutResponseData,
   MOOV_CI_CashoutData,
@@ -88,7 +88,11 @@ export class IntouchCashout {
     const validatedPayload = await omCICashoutDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
+      generateCashOutIntouchURL(
+        this.agentCode,
+        this.loginAgent,
+        this.passwordAgent
+      ),
       {
         method: "PUT",
         headers: {
@@ -149,7 +153,11 @@ export class IntouchCashout {
     const validatedPayload = await moovCICashoutDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
+      generateCashOutIntouchURL(
+        this.agentCode,
+        this.loginAgent,
+        this.passwordAgent
+      ),
       {
         method: "PUT",
         headers: {
@@ -210,7 +218,11 @@ export class IntouchCashout {
     const validatedPayload = await mtnCICashoutDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
+      generateCashOutIntouchURL(
+        this.agentCode,
+        this.loginAgent,
+        this.passwordAgent
+      ),
       {
         method: "PUT",
         headers: {
@@ -277,7 +289,11 @@ export class IntouchCashout {
     const validatedPayload = await waveCICashoutDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
+      generateCashOutIntouchURL(
+        this.agentCode,
+        this.loginAgent,
+        this.passwordAgent
+      ),
       {
         method: "PUT",
         headers: {

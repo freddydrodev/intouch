@@ -1,4 +1,5 @@
 import DigestFetch from "digest-fetch";
+import { generateBalanceIntouchURL } from "../generate-intouch-url";
 
 /**
  * Class representing the balance functionality for Intouch payment service
@@ -39,7 +40,7 @@ export class IntouchBalance {
    */
   async get() {
     const result = await this.digest.fetch(
-      `https://apidist.gutouch.net/apidist/sec/${this.agentCode}/get_balance`,
+      generateBalanceIntouchURL(this.agentCode),
       {
         method: "POST",
         headers: {

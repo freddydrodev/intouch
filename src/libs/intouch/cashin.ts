@@ -1,4 +1,4 @@
-import { generateIntouchURL } from "@/libs/generate-intouch-url";
+import { generateCashInIntouchURL } from "@/libs/generate-intouch-url";
 import {
   CashinResponseData,
   MOOV_CI_CashinData,
@@ -86,16 +86,31 @@ export class IntouchCashin {
     // Validate payload
     const validatedPayload = await omCICashinDataSchema.parseAsync(payload);
 
-    const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
-      {
+    const url = generateCashInIntouchURL(
+      this.agentCode,
+      this.loginApi,
+      this.passwordApi
+    );
+
+    console.warn("URL/OM_CI", url);
+    console.warn(
+      "VALIDATED PAYLOAD/OM_CI",
+      JSON.stringify({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(validatedPayload),
-      }
+      })
     );
+
+    const result = await this.digest.fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(validatedPayload),
+    });
 
     const response = await result.json();
 
@@ -145,7 +160,7 @@ export class IntouchCashin {
     const validatedPayload = await moovCICashinDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
+      generateCashInIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
         headers: {
@@ -203,7 +218,7 @@ export class IntouchCashin {
     const validatedPayload = await mtnCICashinDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
+      generateCashInIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
         headers: {
@@ -261,7 +276,7 @@ export class IntouchCashin {
     const validatedPayload = await waveCICashinDataSchema.parseAsync(payload);
 
     const result = await this.digest.fetch(
-      generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
+      generateCashInIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
         headers: {
