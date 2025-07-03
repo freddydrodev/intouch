@@ -10,6 +10,7 @@ import { IntouchCashin } from "./cashin";
 export interface IntouchConfig {
   agentCode: string;
   partnerId: string;
+  partnerName: string;
   loginApi: string;
   passwordApi: string;
   username: string;
@@ -38,6 +39,7 @@ export class Intouch {
    *    const intouch = new Intouch({
    *      agentCode: "your_agent_code",
    *      partnerId: "your_partner_id",
+   *      partnerName: "your_partner_name",
    *      loginApi: "your_login_api",
    *      passwordApi: "your_password_api",
    *      username: "your_username",
@@ -46,11 +48,12 @@ export class Intouch {
    *
    * 3. With individual parameters:
    *    const intouch = new Intouch(
-   *      "agent_code", "partner_id", "login_api", "password_api", "username", "password"
+   *      "agent_code", "partner_id", "partner_name", "login_api", "password_api", "username", "password"
    *    );
    *
    * @param {IntouchConfig | string} [configOrAgentCode] - Configuration object, agent code, or undefined for env vars
    * @param {string} [partnerId] - The partner ID (when using individual parameters)
+   * @param {string} [partnerName] - The partner name (when using individual parameters)
    * @param {string} [loginApi] - The login API credentials (when using individual parameters)
    * @param {string} [passwordApi] - The password API credentials (when using individual parameters)
    * @param {string} [username] - The username for digest authentication (when using individual parameters)
@@ -59,6 +62,7 @@ export class Intouch {
   constructor(
     configOrAgentCode?: IntouchConfig | string,
     partnerId?: string,
+    partnerName?: string,
     loginApi?: string,
     passwordApi?: string,
     username?: string,
@@ -66,6 +70,7 @@ export class Intouch {
   ) {
     let agentCode: string;
     let finalPartnerId: string;
+    let finalPartnerName: string;
     let finalLoginApi: string;
     let finalPasswordApi: string;
     let finalUsername: string;
@@ -76,6 +81,7 @@ export class Intouch {
       // Method 1: Use environment variables (recommended)
       agentCode = process.env.INTOUCH_AGENT_CODE || "";
       finalPartnerId = process.env.INTOUCH_PARTNER_ID || "";
+      finalPartnerName = process.env.INTOUCH_PARTNER_NAME || "";
       finalLoginApi = process.env.INTOUCH_LOGIN_API || "";
       finalPasswordApi = process.env.INTOUCH_PASSWORD_API || "";
       finalUsername = process.env.INTOUCH_CI_USERNAME || "";
@@ -84,6 +90,7 @@ export class Intouch {
       // Method 2: Use configuration object
       agentCode = configOrAgentCode.agentCode;
       finalPartnerId = configOrAgentCode.partnerId;
+      finalPartnerName = configOrAgentCode.partnerName;
       finalLoginApi = configOrAgentCode.loginApi;
       finalPasswordApi = configOrAgentCode.passwordApi;
       finalUsername = configOrAgentCode.username;
@@ -92,6 +99,7 @@ export class Intouch {
       // Method 3: Use individual parameters
       agentCode = configOrAgentCode;
       finalPartnerId = partnerId || "";
+      finalPartnerName = partnerName || "";
       finalLoginApi = loginApi || "";
       finalPasswordApi = passwordApi || "";
       finalUsername = username || "";
@@ -107,6 +115,11 @@ export class Intouch {
     if (!finalPartnerId) {
       throw new Error(
         "Partner ID is required. Please provide it via environment variable INTOUCH_PARTNER_ID or constructor parameter."
+      );
+    }
+    if (!finalPartnerName) {
+      throw new Error(
+        "Partner name is required. Please provide it via environment variable INTOUCH_PARTNER_NAME or constructor parameter."
       );
     }
     if (!finalLoginApi) {
@@ -147,7 +160,8 @@ export class Intouch {
       agentCode,
       finalLoginApi,
       finalPasswordApi,
-      digest
+      digest,
+      finalPartnerName
     );
     this.cashin = new IntouchCashin(
       agentCode,

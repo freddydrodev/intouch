@@ -24,23 +24,27 @@ export class IntouchCashout {
   private readonly loginAgent: string;
   private readonly passwordAgent: string;
   private readonly digest: DigestFetch;
+  private readonly partnerName: string;
 
   /**
    * Creates an instance of IntouchCashout
    * @param {string} agentCode - The agent code from Intouch
    * @param {string} loginAgent - The login agent credentials
    * @param {string} passwordAgent - The password agent credentials
+   * @param {string} partnerName - The partner name
    */
   constructor(
     agentCode: string,
     loginAgent: string,
     passwordAgent: string,
-    digest: DigestFetch
+    digest: DigestFetch,
+    partnerName: string
   ) {
     this.agentCode = agentCode;
     this.loginAgent = loginAgent;
     this.passwordAgent = passwordAgent;
     this.digest = digest;
+    this.partnerName = partnerName;
   }
 
   /**
@@ -282,6 +286,12 @@ export class IntouchCashout {
   async WAVE_CI(data: WAVE_CI_CashoutData): Promise<CashoutResponseData> {
     const payload = {
       ...data,
+      additionnalInfos: {
+        ...data.additionnalInfos,
+        partner_name: this.partnerName,
+        return_url: data.callback ?? data.additionnalInfos.return_url,
+        cancel_url: data.callback ?? data.additionnalInfos.cancel_url,
+      },
       serviceCode: "CI_PAIEMENTWAVE_TP",
     };
 
