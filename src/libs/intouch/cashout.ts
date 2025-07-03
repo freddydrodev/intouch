@@ -1,4 +1,3 @@
-import { digest } from "@/libs/digest";
 import { generateIntouchURL } from "@/libs/generate-intouch-url";
 import {
   CashoutResponseData,
@@ -14,6 +13,7 @@ import {
   waveCICashoutDataSchema,
   cashoutResponseDataSchema,
 } from "@/schemas/cashout";
+import DigestFetch from "digest-fetch";
 
 /**
  * Class representing the cashout functionality for Intouch payment service
@@ -23,6 +23,7 @@ export class IntouchCashout {
   private readonly agentCode: string;
   private readonly loginAgent: string;
   private readonly passwordAgent: string;
+  private readonly digest: DigestFetch;
 
   /**
    * Creates an instance of IntouchCashout
@@ -30,10 +31,16 @@ export class IntouchCashout {
    * @param {string} loginAgent - The login agent credentials
    * @param {string} passwordAgent - The password agent credentials
    */
-  constructor(agentCode: string, loginAgent: string, passwordAgent: string) {
+  constructor(
+    agentCode: string,
+    loginAgent: string,
+    passwordAgent: string,
+    digest: DigestFetch
+  ) {
     this.agentCode = agentCode;
     this.loginAgent = loginAgent;
     this.passwordAgent = passwordAgent;
+    this.digest = digest;
   }
 
   /**
@@ -75,7 +82,7 @@ export class IntouchCashout {
     // Validate payload
     const validatedPayload = await omCICashoutDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
       {
         method: "PUT",
@@ -131,7 +138,7 @@ export class IntouchCashout {
     // Validate payload
     const validatedPayload = await moovCICashoutDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
       {
         method: "PUT",
@@ -187,7 +194,7 @@ export class IntouchCashout {
     // Validate payload
     const validatedPayload = await mtnCICashoutDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
       {
         method: "PUT",
@@ -249,7 +256,7 @@ export class IntouchCashout {
     // Validate payload
     const validatedPayload = await waveCICashoutDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginAgent, this.passwordAgent),
       {
         method: "PUT",

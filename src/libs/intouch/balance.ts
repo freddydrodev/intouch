@@ -1,4 +1,4 @@
-import { digest } from "../digest";
+import DigestFetch from "digest-fetch";
 
 /**
  * Class representing the balance functionality for Intouch payment service
@@ -9,6 +9,7 @@ export class IntouchBalance {
   private readonly partnerId: string;
   private readonly loginApi: string;
   private readonly passwordApi: string;
+  private readonly digest: DigestFetch;
 
   /**
    * Creates an instance of IntouchBalance
@@ -21,12 +22,14 @@ export class IntouchBalance {
     agentCode: string,
     partnerId: string,
     loginApi: string,
-    passwordApi: string
+    passwordApi: string,
+    digest: DigestFetch
   ) {
     this.agentCode = agentCode;
     this.partnerId = partnerId;
     this.loginApi = loginApi;
     this.passwordApi = passwordApi;
+    this.digest = digest;
   }
 
   /**
@@ -35,7 +38,7 @@ export class IntouchBalance {
    * @throws {Error} If the API request fails
    */
   async get() {
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       `https://apidist.gutouch.net/apidist/sec/${this.agentCode}/get_balance`,
       {
         method: "POST",

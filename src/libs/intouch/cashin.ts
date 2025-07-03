@@ -1,4 +1,3 @@
-import { digest } from "@/libs/digest";
 import { generateIntouchURL } from "@/libs/generate-intouch-url";
 import {
   CashinResponseData,
@@ -14,6 +13,7 @@ import {
   waveCICashinDataSchema,
   cashinResponseDataSchema,
 } from "@/schemas/cashin";
+import DigestFetch from "digest-fetch";
 
 /**
  * Class representing the cashin functionality for Intouch payment service
@@ -24,7 +24,7 @@ export class IntouchCashin {
   private readonly partnerId: string;
   private readonly loginApi: string;
   private readonly passwordApi: string;
-
+  private readonly digest: DigestFetch;
   /**
    * Creates an instance of IntouchCashin
    * @param {string} agentCode - The agent code from Intouch
@@ -36,12 +36,14 @@ export class IntouchCashin {
     agentCode: string,
     partnerId: string,
     loginApi: string,
-    passwordApi: string
+    passwordApi: string,
+    digest: DigestFetch
   ) {
     this.agentCode = agentCode;
     this.partnerId = partnerId;
     this.loginApi = loginApi;
     this.passwordApi = passwordApi;
+    this.digest = digest;
   }
 
   /**
@@ -76,7 +78,7 @@ export class IntouchCashin {
     // Validate payload
     const validatedPayload = await omCICashinDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
@@ -127,7 +129,7 @@ export class IntouchCashin {
     // Validate payload
     const validatedPayload = await moovCICashinDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
@@ -178,7 +180,7 @@ export class IntouchCashin {
     // Validate payload
     const validatedPayload = await mtnCICashinDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
@@ -229,7 +231,7 @@ export class IntouchCashin {
     // Validate payload
     const validatedPayload = await waveCICashinDataSchema.parseAsync(payload);
 
-    const result = await digest.fetch(
+    const result = await this.digest.fetch(
       generateIntouchURL(this.agentCode, this.loginApi, this.passwordApi),
       {
         method: "POST",
