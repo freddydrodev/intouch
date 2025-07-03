@@ -74,7 +74,15 @@ export class IntouchCashin {
    * });
    * ```
    */
-  async OM_CI(payload: OM_CI_CashinData): Promise<CashinResponseData> {
+  async OM_CI(data: OM_CI_CashinData): Promise<CashinResponseData> {
+    const payload = {
+      ...data,
+      service_id: "CASHINOMCIPART",
+      partner_id: this.partnerId,
+      login_api: this.loginApi,
+      password_api: this.passwordApi,
+    };
+
     // Validate payload
     const validatedPayload = await omCICashinDataSchema.parseAsync(payload);
 
@@ -91,7 +99,7 @@ export class IntouchCashin {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/OM_CI", response);
+    console.warn("INTOUCH_JS/CASHIN/OM_CI", response);
 
     // Validate response
     return await cashinResponseDataSchema.parseAsync(response);
@@ -125,7 +133,14 @@ export class IntouchCashin {
    * });
    * ```
    */
-  async MOOV_CI(payload: MOOV_CI_CashinData): Promise<CashinResponseData> {
+  async MOOV_CI(data: MOOV_CI_CashinData): Promise<CashinResponseData> {
+    const payload = {
+      ...data,
+      service_id: "CASHINMOOVPART",
+      partner_id: this.partnerId,
+      login_api: this.loginApi,
+      password_api: this.passwordApi,
+    };
     // Validate payload
     const validatedPayload = await moovCICashinDataSchema.parseAsync(payload);
 
@@ -142,7 +157,7 @@ export class IntouchCashin {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/MOOV_CI", response);
+    console.warn("INTOUCH_JS/CASHIN/MOOV_CI", response);
 
     // Validate response
     return await cashinResponseDataSchema.parseAsync(response);
@@ -176,7 +191,14 @@ export class IntouchCashin {
    * });
    * ```
    */
-  async MTN_CI(payload: MTN_CI_CashinData): Promise<CashinResponseData> {
+  async MTN_CI(data: MTN_CI_CashinData): Promise<CashinResponseData> {
+    const payload = {
+      ...data,
+      service_id: "CASHINMTNPART",
+      partner_id: this.partnerId,
+      login_api: this.loginApi,
+      password_api: this.passwordApi,
+    };
     // Validate payload
     const validatedPayload = await mtnCICashinDataSchema.parseAsync(payload);
 
@@ -193,7 +215,7 @@ export class IntouchCashin {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/MTN_CI", response);
+    console.warn("INTOUCH_JS/CASHIN/MTN_CI", response);
 
     // Validate response
     return await cashinResponseDataSchema.parseAsync(response);
@@ -227,7 +249,14 @@ export class IntouchCashin {
    * });
    * ```
    */
-  async WAVE_CI(payload: WAVE_CI_CashinData): Promise<CashinResponseData> {
+  async WAVE_CI(data: WAVE_CI_CashinData): Promise<CashinResponseData> {
+    const payload = {
+      ...data,
+      service_id: "CI_CASHIN_WAVE_PART",
+      partner_id: this.partnerId,
+      login_api: this.loginApi,
+      password_api: this.passwordApi,
+    };
     // Validate payload
     const validatedPayload = await waveCICashinDataSchema.parseAsync(payload);
 
@@ -244,7 +273,7 @@ export class IntouchCashin {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/WAVE_CI", response);
+    console.warn("INTOUCH_JS/CASHIN/WAVE_CI", response);
 
     // Validate response
     return await cashinResponseDataSchema.parseAsync(response);

@@ -1,6 +1,6 @@
 {
   "name": "@freddydrodev/intouch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A modern Node.js library for seamless interaction with the Intouch API. This library provides a simple and intuitive interface to make API calls to Intouch services.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "tsup src/index.ts --format cjs --dts --watch",
     "build": "tsup src/index.ts --format cjs --dts",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "deploy": "npm run build && npm run publish"
   },
   "keywords": [],
   "author": "Diomande Dro Freddy Junior",

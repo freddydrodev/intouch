@@ -78,7 +78,12 @@ export class IntouchCashout {
    * });
    * ```
    */
-  async OM_CI(payload: OM_CI_CashoutData): Promise<CashoutResponseData> {
+  async OM_CI(data: OM_CI_CashoutData): Promise<CashoutResponseData> {
+    const payload = {
+      ...data,
+      serviceCode: "PAIEMENTMARCHANDOMPAYCIDIRECT",
+    };
+
     // Validate payload
     const validatedPayload = await omCICashoutDataSchema.parseAsync(payload);
 
@@ -95,7 +100,7 @@ export class IntouchCashout {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/OM_CI", response);
+    console.warn("INTOUCH_JS/CASHOUT/OM_CI", response);
 
     // Validate response
     return await cashoutResponseDataSchema.parseAsync(response);
@@ -134,7 +139,12 @@ export class IntouchCashout {
    * });
    * ```
    */
-  async MOOV_CI(payload: MOOV_CI_CashoutData): Promise<CashoutResponseData> {
+  async MOOV_CI(data: MOOV_CI_CashoutData): Promise<CashoutResponseData> {
+    const payload = {
+      ...data,
+      serviceCode: "PAIEMENTMARCHAND_MOOV_CI",
+    };
+
     // Validate payload
     const validatedPayload = await moovCICashoutDataSchema.parseAsync(payload);
 
@@ -151,7 +161,7 @@ export class IntouchCashout {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/MOOV_CI", response);
+    console.warn("INTOUCH_JS/CASHOUT/MOOV_CI", response);
 
     // Validate response
     return await cashoutResponseDataSchema.parseAsync(response);
@@ -190,7 +200,12 @@ export class IntouchCashout {
    * });
    * ```
    */
-  async MTN_CI(payload: MTN_CI_CashoutData): Promise<CashoutResponseData> {
+  async MTN_CI(data: MTN_CI_CashoutData): Promise<CashoutResponseData> {
+    const payload = {
+      ...data,
+      serviceCode: "PAIEMENTMARCHAND_MTN_CI",
+    };
+
     // Validate payload
     const validatedPayload = await mtnCICashoutDataSchema.parseAsync(payload);
 
@@ -207,7 +222,7 @@ export class IntouchCashout {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/MTN_CI", response);
+    console.warn("INTOUCH_JS/CASHOUT/MTN_CI", response);
 
     // Validate response
     return await cashoutResponseDataSchema.parseAsync(response);
@@ -252,7 +267,12 @@ export class IntouchCashout {
    * });
    * ```
    */
-  async WAVE_CI(payload: WAVE_CI_CashoutData): Promise<CashoutResponseData> {
+  async WAVE_CI(data: WAVE_CI_CashoutData): Promise<CashoutResponseData> {
+    const payload = {
+      ...data,
+      serviceCode: "CI_PAIEMENTWAVE_TP",
+    };
+
     // Validate payload
     const validatedPayload = await waveCICashoutDataSchema.parseAsync(payload);
 
@@ -269,7 +289,7 @@ export class IntouchCashout {
 
     const response = await result.json();
 
-    console.warn("RESPONSE/WAVE_CI", response);
+    console.warn("INTOUCH_JS/CASHOUT/WAVE_CI", response);
 
     // Validate response
     return await cashoutResponseDataSchema.parseAsync(response);
