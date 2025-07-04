@@ -16,7 +16,7 @@ import { z } from "zod";
  * @property {string} [detailMessage] - Detailed message
  */
 export const baseResponseDataSchema = z.object({
-  status: z.enum(["SUCCESSFUL", "INITIATED"]).optional(),
+  status: z.enum(["SUCCESSFUL", "INITIATED", "PENDING"]).optional(),
   message: z.string().optional(),
   idFromClient: z.string().optional(),
   idFromGU: z.string().optional(),

@@ -1,6 +1,6 @@
 {
   "name": "@freddydrodev/intouch",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A modern Node.js library for seamless interaction with the Intouch API. This library provides a simple and intuitive interface to make API calls to Intouch services.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

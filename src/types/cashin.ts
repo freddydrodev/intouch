@@ -2,7 +2,7 @@ import { TCashinServiceCode } from "./common";
 
 export type CashinResponseData = {
   //both
-  status?: "SUCCESSFUL" | "INITIATED";
+  status?: "SUCCESSFUL" | "INITIATED" | "PENDING";
 
   //error case
   message?: string;
