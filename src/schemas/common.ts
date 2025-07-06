@@ -3,7 +3,7 @@ import { z } from "zod";
 /**
  * Schema for base response data shared between cashin and cashout
  * @typedef {Object} BaseResponseData
- * @property {"SUCCESSFUL" | "INITIATED"} [status] - Status of the transaction
+ * @property {"SUCCESSFUL" | "INITIATED" | "PENDING" | "FAILED"} [status] - Status of the transaction
  * @property {string} [message] - Error message if any
  * @property {string} [idFromClient] - Client's transaction ID
  * @property {string} [idFromGU] - GU's transaction ID
@@ -16,7 +16,7 @@ import { z } from "zod";
  * @property {string} [detailMessage] - Detailed message
  */
 export const baseResponseDataSchema = z.object({
-  status: z.enum(["SUCCESSFUL", "INITIATED", "PENDING"]).optional(),
+  status: z.enum(["SUCCESSFUL", "INITIATED", "PENDING", "FAILED"]).optional(),
   message: z.string().optional(),
   idFromClient: z.string().optional(),
   idFromGU: z.string().optional(),

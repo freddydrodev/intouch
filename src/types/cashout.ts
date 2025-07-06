@@ -2,7 +2,7 @@ import { TCashoutServiceCode } from "./common";
 
 export type CashoutResponseData = {
   //both
-  status?: "SUCCESSFUL" | "INITIATED" | "PENDING";
+  status?: "SUCCESSFUL" | "INITIATED" | "PENDING" | "FAILED";
 
   //error case
   message?: string;
